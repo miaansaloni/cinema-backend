@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -10,6 +12,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class UserFactory extends Factory
 {
+    protected $model = User::class;
+
     /**
      * Define the model's default state.
      *
@@ -25,9 +29,9 @@ class UserFactory extends Factory
             'password' => Hash::make('password'), // password di default
             'phone' => $this->faker->phoneNumber,
             'address' => $this->faker->address,
-            'user_type' => $this->faker->randomElement(['admin', 'customer']),
+            'user_type' => 'user', // Default user type
             'email_verified_at' => now(),
-            'remember_token' => \Illuminate\Support\Str::random(10),
+            'remember_token' => Str::random(10),
         ];
     }
 }

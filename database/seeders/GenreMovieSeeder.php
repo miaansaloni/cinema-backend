@@ -10,14 +10,19 @@ class GenreMovieSeeder extends Seeder
 {
     public function run()
     {
-        // Prendiamo tutti i film e tutti i generi
-        $movies = Movie::all();
+        // Otteniamo tutti i generi e tutti i film
         $genres = Genre::all();
+        $movies = Movie::all();
 
-        // Popolazione della tabella pivot con collegamenti casuali
+        // Associamo ogni genere a più film in modo casuale
         foreach ($movies as $movie) {
-            $randomGenres = $genres->random(rand(1, 3))->pluck('id')->toArray();
-            $movie->genres()->attach($randomGenres);
+            // Selezioniamo un numero casuale di generi da associare al film
+            $randomGenres = $genres->random(random_int(1, 3)); // Associa da 1 a 3 generi per ogni film
+
+            foreach ($randomGenres as $genre) {
+                // Collegamento tra il genere e il film
+                $movie->genres()->attach($genre->id);
+            }
         }
     }
 }

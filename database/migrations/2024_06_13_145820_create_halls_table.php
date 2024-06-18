@@ -17,7 +17,6 @@ return new class extends Migration
             $table->integer('capacity');
             $table->unsignedBigInteger('theater_id');
             $table->foreign('theater_id')->references('id')->on('theaters')->onDelete('cascade')->onUpdate('cascade');
-            // $table->foreignId('theater_id')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

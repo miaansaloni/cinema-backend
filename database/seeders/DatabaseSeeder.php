@@ -4,8 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\DiscountCategory;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use App\Models\DiscountCategory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,15 +15,29 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
 
+        // // Creazione dell'utente admin
         // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
+        //     'first_name' => 'Admin',
+        //     'last_name' => 'User',
+        //     'email' => 'admin@example.com',
+        //     'user_type' => 'admin',
+        //     'password' => bcrypt('password'), 
+        //     // Gli altri campi vengono popolati dalla factory
+        // ]);
+
+        // // Creazione dell'utente standard
+        // User::factory()->create([
+        //     'first_name' => 'Standard',
+        //     'last_name' => 'User',
+        //     'email' => 'user@example.com',
+        //     'user_type' => 'user',
+        //     'password' => bcrypt('password'), 
+        //     // Gli altri campi vengono popolati dalla factory
         // ]);
 
         $this->call([
-            UserSeeder::class,
+            UserSeeder::class, 
             MovieSeeder::class, 
             GenreSeeder::class,
             TheaterSeeder::class,    
