@@ -23,6 +23,20 @@ class Ticket extends Model
         'purchase_date' => 'datetime',
     ];
 
+
+    // public static function boot()
+    // {
+    //     parent::boot();
+
+    //     static::creating(function ($ticket) {
+    //         $reservation = Reservation::find($ticket->reservation_id);
+
+    //         if ($reservation && $reservation->status !== 'confirmed') {
+    //             throw new \Exception('Reservation not confirmed');
+    //         }
+    //     });
+    // }
+
     public function reservation()
     {
         return $this->belongsTo(Reservation::class);

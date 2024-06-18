@@ -30,7 +30,7 @@ class UserController extends Controller
             'password' => 'required|string|min:8',
             'phone' => 'required|string|max:30',
             'address' => 'required|string',
-            'user_type' => 'required|string|max:20',
+            // 'user_type' => 'required|string|max:20',
         ]);
 
         $user = User::create([
@@ -41,7 +41,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
             'address' => $request->address,
-            'user_type' => $request->user_type,
+            // 'user_type' => $request->user_type,
         ]);
 
         return response()->json($user, 201);
@@ -71,7 +71,7 @@ class UserController extends Controller
             'password' => 'sometimes|string|min:8',
             'phone' => 'sometimes|string|max:30',
             'address' => 'sometimes|string',
-            'user_type' => 'sometimes|string|max:20',
+            // 'user_type' => 'sometimes|string|max:20',
         ]);
 
         if ($request->has('password')) {
@@ -103,4 +103,6 @@ class UserController extends Controller
 
         return response()->json($tickets);
     }
+
+    
 }
