@@ -28,8 +28,6 @@ class SeatSeeder extends Seeder
                     ]);
                 }
             }
-
-            // Aggiungi altre logiche di creazione dei posti se necessario
         }
     }
 }

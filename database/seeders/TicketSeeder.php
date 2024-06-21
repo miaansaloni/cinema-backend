@@ -16,13 +16,11 @@ class TicketSeeder extends Seeder
      */
     public function run()
     {
-        // Ottieni tutte le prenotazioni
         $reservations = Reservation::all();
 
         // Cicla su ogni prenotazione e crea un biglietto
         foreach ($reservations as $reservation) {
-            // Calcola il prezzo base (può essere calcolato in base alla logica del tuo sistema)
-            $basePrice = 20.00; // Esempio di prezzo base fisso
+            $basePrice = 10.00; // Esempio di prezzo base fisso
 
             // Scegli un eventuale sconto casuale
             $discountId = null;
@@ -33,8 +31,6 @@ class TicketSeeder extends Seeder
             } else {
                 $finalPrice = $basePrice;
             }
-
-            // Creazione del biglietto
             Ticket::create([
                 'reservation_id' => $reservation->id,
                 'base_price' => $basePrice,

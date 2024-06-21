@@ -13,10 +13,16 @@ class MovieController extends Controller
     /**
      * Display a listing of the resource.
      */
+    // public function index()
+    // {
+    //     $movies = Movie::all();
+    //     return response()->json($movies, 200);
+    // }
+
     public function index()
     {
-        $movies = Movie::all();
-        return response()->json($movies, 200);
+        $movies = Movie::with(['genres', 'showtimes'])->get();
+        return response()->json($movies);
     }
 
     /**

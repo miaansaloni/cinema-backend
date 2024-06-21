@@ -194,48 +194,17 @@ class AdminController extends Controller
          return response()->json($movie->genres()->get(), 200);
      }
 
-    //  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> DA FINIRE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-      /////// Reservations ///////
-    //  public function indexReservations()
-    //  {
-    //      $this->authorizeAdmin();
-    //      $reservations = Reservation::all();
-    //      return response()->json($reservations);
-    //  }
 
-    //  public function showReservation($id)
-    // {
-    //     $this->authorizeAdmin();
-    //     $reservation = Reservation::findOrFail($id);
-    //     return response()->json($reservation);
-    // }
-
-    // public function updateReservation(UpdateReservationRequest $request, $id)
-    // {
-    //     $this->authorizeAdmin();
-    //     $reservation = Reservation::findOrFail($id);
-
-    //     // Validazione dei dati
-    //     $validatedData = $request->validated();
-
-    //     // Aggiornamento della prenotazione
-    //     $reservation->update($validatedData);
-
-    //     return response()->json($reservation);
-    // }
-
-    // public function deleteReservation($id)
-    // {
-    //     $this->authorizeAdmin();
-    //     $reservation = Reservation::findOrFail($id);
-    //     $reservation->delete();
-
-    //     return response()->json(null, 204);
-    // }
-
-
-
-
+    /////// RESERVATION STATUS MANAGEMENT ///////
+     public function updateReservationStatus(Request $request, Reservation $reservation)
+    {
+        $this->authorizeAdmin();
+        $request->validate([
+            'status' => 'required|string|in:pending,confirmed,cancelled', // Assumi che questi siano i valori possibili
+        ]);
+        $reservation->update(['status' => $request->status]);
+        return response()->json($reservation, 200);
+    }
 
     // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> IN FORSE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     //////// Theaters Management ////////

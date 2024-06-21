@@ -34,6 +34,24 @@ class DiscountCategorySeeder extends Seeder
                 'discount_percentage' => 20.00,
                 'condition' => 'Buy 4 or more tickets in a single transaction.',
             ],
+            [
+                'name' => 'Senior Citizen Discount',
+                'description' => 'Discount for senior citizens aged 60 and above.',
+                'discount_percentage' => 12.00,
+                'condition' => 'Proof of age required at the counter.',
+            ],
+            [
+                'name' => 'Weekend Special',
+                'description' => 'Special discount for weekend shows.',
+                'discount_percentage' => 8.00,
+                'condition' => 'Valid for shows on Saturdays and Sundays only.',
+            ],
+            [
+                'name' => 'Birthday Discount',
+                'description' => 'Discount for customers on their birthday.',
+                'discount_percentage' => 25.00,
+                'condition' => 'Valid only on the customer\'s birthday with proof of date of birth.',
+            ],
         ];
 
         // Popolamento della tabella 

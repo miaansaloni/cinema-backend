@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HallController;
 use App\Http\Controllers\SeatController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\TicketController;
@@ -18,6 +19,57 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 Route::middleware('auth:sanctum')->get('/user-profile', [UserController::class, 'getUserProfile']);
 
+Route::name('api.v1.')
+    ->prefix('v1')
+    ->group(function () {
+
+    //////////////////////////////////////////
+    ////////////// ADMIN ROUTES \\\\\\\\\\\\\\
+    //////////////////////////////////////////
+
+    // Movies routes
+    Route::get('/movies', [AdminController::class, 'indexMovies']);
+    Route::post('/movies', [AdminController::class, 'storeMovie']);
+    Route::get('/movies/{movie}', [AdminController::class, 'showMovie']);
+    Route::put('/movies/{movie}', [AdminController::class, 'updateMovie']);
+    Route::delete('/movies/{movie}', [AdminController::class, 'destroyMovie']);
+
+    // Showtimes routes
+    Route::get('/showtimes', [AdminController::class, 'indexShowtimes']);
+    Route::post('/showtimes', [AdminController::class, 'createShowtime']);
+    Route::get('/showtimes/{showtime}', [AdminController::class, 'showShowtime']);
+    Route::put('/showtimes/{showtime}', [AdminController::class, 'updateShowtime']);
+    Route::delete('/showtimes/{showtime}', [AdminController::class, 'destroyShowtime']);
+
+    // Discount Categories routes
+    // Route::get('/discount-categories', [AdminController::class, 'indexDiscountCategories']);
+    Route::post('/discount-categories', [AdminController::class, 'createDiscountCategory']);
+    Route::get('/discount-categories/{discountCategory}', [AdminController::class, 'showDiscountCategory']);
+    Route::put('/discount-categories/{discountCategory}', [AdminController::class, 'updateDiscountCategory']);
+    Route::delete('/discount-categories/{discountCategory}', [AdminController::class, 'destroyDiscountCategory']);
+
+    // Genre-Movie association routes
+    Route::post('/movies/{movie}/genres', [AdminController::class, 'attachGenreToMovie']);
+    Route::delete('/movies/{movie}/genres/{genre}', [AdminController::class, 'detachGenreFromMovie']);
+
+    // Update reservation status
+    Route::put('/reservations/{reservation}/status', [AdminController::class, 'updateReservationStatus']);
+
+    //////////////////////////////////////////
+    /////// DISCOUNTCATEGORIES ROUTES \\\\\\\\
+    //////////////////////////////////////////
+    Route::get('/discount-categories', [DiscountCategoryController::class, 'index']);
+    Route::get('/discount-categories/{discount_category}', [DiscountCategoryController::class, 'show']);
+
+    //////////////////////////////////////////
+    ///////////// GENRES ROUTES \\\\\\\\\\\\\\
+    //////////////////////////////////////////
+    Route::get('/genres', [GenreController::class, 'index']);
+    Route::get('/genres/{genre}', [GenreController::class, 'show']);
+
+    // lista dei film di un determinato cinema che include gli showtimes corrispondenti ai film in quel cinema specifico
+    Route::get('theaters/{theater}/movies', [TheaterController::class, 'moviesWithShowtimes']);
+});
 
 
 

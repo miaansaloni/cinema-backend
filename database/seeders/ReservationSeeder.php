@@ -34,5 +34,51 @@ class ReservationSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        // Nuove voci
+        Reservation::create([
+            'user_id' => User::inRandomOrder()->first()->id,
+            'showtime_id' => Showtime::inRandomOrder()->first()->id,
+            'seat_id' => Seat::inRandomOrder()->first()->id,
+            'status' => 'cancelled', // Stato prenotazione cancellata
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        Reservation::create([
+            'user_id' => User::inRandomOrder()->first()->id,
+            'showtime_id' => Showtime::inRandomOrder()->first()->id,
+            'seat_id' => Seat::inRandomOrder()->first()->id,
+            'status' => 'completed', // Stato prenotazione completata
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        Reservation::create([
+            'user_id' => User::inRandomOrder()->first()->id,
+            'showtime_id' => Showtime::inRandomOrder()->first()->id,
+            'seat_id' => Seat::inRandomOrder()->first()->id,
+            'status' => 'confirmed',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        Reservation::create([
+            'user_id' => User::inRandomOrder()->first()->id,
+            'showtime_id' => Showtime::inRandomOrder()->first()->id,
+            'seat_id' => Seat::inRandomOrder()->first()->id,
+            'status' => 'pending',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        Reservation::create([
+            'user_id' => User::inRandomOrder()->first()->id,
+            'showtime_id' => Showtime::inRandomOrder()->first()->id,
+            'seat_id' => Seat::inRandomOrder()->first()->id,
+            'status' => 'completed',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

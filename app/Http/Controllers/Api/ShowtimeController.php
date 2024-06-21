@@ -12,11 +12,18 @@ class ShowtimeController extends Controller
     /**
      * Display a listing of the resource.
      */
+    // public function index()
+    // {
+    //     $showtimes = Showtime::all();
+    //     return response()->json($showtimes);
+    // }
+
     public function index()
     {
-        $showtimes = Showtime::all();
+        $showtimes = Showtime::with(['movie', 'hall'])->get();
         return response()->json($showtimes);
     }
+
 
     /**
      * Show the form for creating a new resource.

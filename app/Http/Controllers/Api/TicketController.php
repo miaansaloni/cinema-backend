@@ -12,11 +12,18 @@ class TicketController extends Controller
     /**
      * Display a listing of the resource.
      */
+    // public function index()
+    // {
+    //     $tickets = Ticket::all();
+    //     return response()->json($tickets);
+    // }
+
     public function index()
     {
-        $tickets = Ticket::all();
-        return response()->json($tickets);
+       $tickets = Ticket::with(['reservation', 'discount'])->get();
+       return response()->json($tickets);
     }
+
 
     /**
      * Store a newly created resource in storage.

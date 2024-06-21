@@ -32,6 +32,18 @@ class HallSeeder extends Seeder
                 'theater_id' => $theater->id,
             ]);
 
+            Hall::create([
+                'name' => 'Hall C',
+                'capacity' => 120,
+                'theater_id' => $theater->id,
+            ]);
+            
+            Hall::create([
+                'name' => 'Hall D',
+                'capacity' => 90,
+                'theater_id' => $theater->id,
+            ]);
+
         }
     }
 }

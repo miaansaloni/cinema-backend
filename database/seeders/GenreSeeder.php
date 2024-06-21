@@ -25,5 +25,6 @@ class GenreSeeder extends Seeder
         Genre::create(['name' => 'Adventure']);
         Genre::create(['name' => 'Fantasy']);
         Genre::create(['name' => 'Animation']);
+        Genre::create(['name' => 'Documentary']);
     }
 }

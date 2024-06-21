@@ -14,21 +14,21 @@ class GenreController extends Controller
      */
     public function index()
     {
-        return Genre::all();
+        // Recupera tutti i generi con i film associati
+        return response()->json(Genre::with('movies')->get());
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-{
-    // Provide default values or necessary data for the form
-    return response()->json([
-        'default_values' => [
-            'name' => '',
-        ]
-    ]);
-}
+    {
+        return response()->json([
+            'default_values' => [
+                'name' => '',
+            ]
+        ]);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -49,7 +49,9 @@ class GenreController extends Controller
      */
     public function show(Genre $genre)
     {
-        return $genre;
+        // Carica i film associati a questo genere
+        $genre->load('movies');
+        return response()->json($genre);
     }
 
     /**

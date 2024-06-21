@@ -50,7 +50,9 @@ class HallController extends Controller
      */
     public function show(Hall $hall)
     {
-        return $hall->load('theater');
+        // Carica il teatro e le seats associate 
+        $hall = Hall::with('theater', 'seats')->find($hall->id);
+        return response()->json($hall);
     }
 
     /**
