@@ -10,9 +10,10 @@ class Theater extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'address',
-        'phone',
-        'email',
+        'name', 'region', 'city', 'address', 'phone', 'email',
     ];
+    public function halls()
+    {
+        return $this->hasMany(Hall::class);
+    }
 }

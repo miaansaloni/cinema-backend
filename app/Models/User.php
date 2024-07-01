@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'first_name', 'last_name', 'birthday', 'email', 'password', 'phone', 'address', 'user_type'
+        'first_name', 'last_name', 'birthday', 'email', 'password', 'phone', 'address'
     ];
 
     /**
@@ -43,7 +43,6 @@ class User extends Authenticatable
         ];
     }
 
-        // Relazioni con altri modelli
         public function tickets()
         {
             return $this->hasMany(Ticket::class);

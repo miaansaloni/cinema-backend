@@ -15,9 +15,16 @@ class Hall extends Model
         'theater_id',
     ];
 
-    // Define the relationship with the Theater model
     public function theater()
     {
         return $this->belongsTo(Theater::class);
+    }
+    public function showtimes()
+    {
+        return $this->hasMany(Showtime::class);
+    }
+    public function seats()
+    {
+        return $this->hasMany(Seat::class); // Aggiungi questa riga
     }
 }

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Reservation;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
 
@@ -37,15 +38,15 @@ class ReservationController extends Controller
      */
     public function store(StoreReservationRequest $request)
     {
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'showtime_id' => 'required|exists:showtimes,id',
-            'seat_id' => 'required|exists:seats,id',
-            'status' => 'required|in:pending,confirmed,cancelled',
-        ]);
+        // $request->validate([
+        //     'user_id' => 'required|exists:users,id',
+        //     'showtime_id' => 'required|exists:showtimes,id',
+        //     'seat_id' => 'required|exists:seats,id',
+        //     'status' => 'required|in:pending,confirmed,cancelled',
+        // ]);
 
-        $reservation = Reservation::create($request->all());
-        return response()->json($reservation, 201);
+        // $reservation = Reservation::create($request->all());
+        // return response()->json($reservation, 201);
     }
 
     /**
@@ -53,7 +54,7 @@ class ReservationController extends Controller
      */
     public function show(Reservation $reservation)
     {
-        return response()->json($reservation);
+        // return response()->json($reservation);
     }
 
     /**
@@ -69,15 +70,15 @@ class ReservationController extends Controller
      */
     public function update(UpdateReservationRequest $request, Reservation $reservation)
     {
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'showtime_id' => 'required|exists:showtimes,id',
-            'seat_id' => 'required|exists:seats,id',
-            'status' => 'required|in:pending,confirmed,cancelled',
-        ]);
+        // $request->validate([
+        //     'user_id' => 'required|exists:users,id',
+        //     'showtime_id' => 'required|exists:showtimes,id',
+        //     'seat_id' => 'required|exists:seats,id',
+        //     'status' => 'required|in:pending,confirmed,cancelled',
+        // ]);
 
-        $reservation->update($request->all());
-        return response()->json($reservation, 200);
+        // $reservation->update($request->all());
+        // return response()->json($reservation, 200);
     }
 
     /**
@@ -85,7 +86,7 @@ class ReservationController extends Controller
      */
     public function destroy(Reservation $reservation)
     {
-        $reservation->delete();
-        return response()->json(null, 204);
+        // $reservation->delete();
+        // return response()->json(null, 204);
     }
 }

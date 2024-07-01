@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Showtime;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreShowtimeRequest;
 use App\Http\Requests\UpdateShowtimeRequest;
 
@@ -38,15 +39,15 @@ class ShowtimeController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'movie_id' => 'required|exists:movies,id',
-            'hall_id' => 'required|exists:halls,id',
-            'start_time' => 'required|date_format:Y-m-d H:i',
-        ]);
+        // $request->validate([
+        //     'movie_id' => 'required|exists:movies,id',
+        //     'hall_id' => 'required|exists:halls,id',
+        //     'start_time' => 'required|date_format:Y-m-d H:i',
+        // ]);
 
-        $showtime = Showtime::create($request->all());
+        // $showtime = Showtime::create($request->all());
 
-        return response()->json($showtime, 201);
+        // return response()->json($showtime, 201);
     }
 
     /**
@@ -70,14 +71,14 @@ class ShowtimeController extends Controller
      */
     public function update(UpdateShowtimeRequest $request, Showtime $showtime)
     {
-        $request->validate([
-            'movie_id' => 'required|exists:movies,id',
-            'hall_id' => 'required|exists:halls,id',
-            'start_time' => 'required|date_format:Y-m-d H:i',
-        ]);
+        // $request->validate([
+        //     'movie_id' => 'required|exists:movies,id',
+        //     'hall_id' => 'required|exists:halls,id',
+        //     'start_time' => 'required|date_format:Y-m-d H:i',
+        // ]);
 
-        $showtime->update($request->all());
-        return response()->json($showtime, 200);
+        // $showtime->update($request->all());
+        // return response()->json($showtime, 200);
     }
 
     /**
@@ -85,7 +86,7 @@ class ShowtimeController extends Controller
      */
     public function destroy(Showtime $showtime)
     {
-        $showtime->delete();
-        return response()->json(null, 204);
+        // $showtime->delete();
+        // return response()->json(null, 204);
     }
 }

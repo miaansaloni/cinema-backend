@@ -2,22 +2,23 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HallController;
-use App\Http\Controllers\SeatController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\GenreController;
-use App\Http\Controllers\MovieController;
-use App\Http\Controllers\TicketController;
-use App\Http\Controllers\TheaterController;
-use App\Http\Controllers\ShowtimeController;
-use App\Http\Controllers\ReservationController;
-use App\Http\Controllers\DiscountCategoryController;
+use App\Http\Controllers\Api\HallController;
+use App\Http\Controllers\Api\SeatController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\AdminController;
+use App\Http\Controllers\Api\GenreController;
+use App\Http\Controllers\Api\MovieController;
+use App\Http\Controllers\Api\TicketController;
+use App\Http\Controllers\Api\TheaterController;
+use App\Http\Controllers\Api\ShowtimeController;
+use App\Http\Controllers\Api\ReservationController;
+use App\Http\Controllers\Api\DiscountCategoryController;
+use Illuminate\Support\Facades\Auth;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::middleware('auth:sanctum')->get('/user-profile', [UserController::class, 'getUserProfile']);
+// Route::middleware('auth:sanctum')->get('/user-profile', [UserController::class, 'getUserProfile']);
 
 Route::name('api.v1.')
     ->prefix('v1')
@@ -27,58 +28,61 @@ Route::name('api.v1.')
     ////////////// ADMIN ROUTES \\\\\\\\\\\\\\
     //////////////////////////////////////////
 
-    // Movies routes
-    Route::get('/movies', [AdminController::class, 'indexMovies']);
+    // Movies 
     Route::post('/movies', [AdminController::class, 'storeMovie']);
-    Route::get('/movies/{movie}', [AdminController::class, 'showMovie']);
     Route::put('/movies/{movie}', [AdminController::class, 'updateMovie']);
     Route::delete('/movies/{movie}', [AdminController::class, 'destroyMovie']);
 
-    // Showtimes routes
-    Route::get('/showtimes', [AdminController::class, 'indexShowtimes']);
+    // Showtimes 
     Route::post('/showtimes', [AdminController::class, 'createShowtime']);
-    Route::get('/showtimes/{showtime}', [AdminController::class, 'showShowtime']);
     Route::put('/showtimes/{showtime}', [AdminController::class, 'updateShowtime']);
     Route::delete('/showtimes/{showtime}', [AdminController::class, 'destroyShowtime']);
 
-    // Discount Categories routes
+    // Discount Categories 
     // Route::get('/discount-categories', [AdminController::class, 'indexDiscountCategories']);
     Route::post('/discount-categories', [AdminController::class, 'createDiscountCategory']);
-    Route::get('/discount-categories/{discountCategory}', [AdminController::class, 'showDiscountCategory']);
     Route::put('/discount-categories/{discountCategory}', [AdminController::class, 'updateDiscountCategory']);
     Route::delete('/discount-categories/{discountCategory}', [AdminController::class, 'destroyDiscountCategory']);
 
-    // Genre-Movie association routes
+    // Genre-Movie association 
     Route::post('/movies/{movie}/genres', [AdminController::class, 'attachGenreToMovie']);
     Route::delete('/movies/{movie}/genres/{genre}', [AdminController::class, 'detachGenreFromMovie']);
 
     // Update reservation status
     Route::put('/reservations/{reservation}/status', [AdminController::class, 'updateReservationStatus']);
+    
+    //////////////////////////////////////////
+    ////////////// GET GENERALI //////////////
+    //////////////////////////////////////////
 
-    //////////////////////////////////////////
-    /////// DISCOUNTCATEGORIES ROUTES \\\\\\\\
-    //////////////////////////////////////////
-    Route::get('/discount-categories', [DiscountCategoryController::class, 'index']);
-    Route::get('/discount-categories/{discount_category}', [DiscountCategoryController::class, 'show']);
+    // TORNA UNO SPECIFICO CINEMA CON TUTTI I FILM ASSOCIATI, A CUI A LORO VOLTA SONO ASSOCIATI GLI ORARI DI PROIEZIONE E LE RISPETTIVE SALE
+    Route::get('/theaters/{theater}/movies-with-showtimes', [TheaterController::class, 'moviesWithShowtimes']);
 
-    //////////////////////////////////////////
-    ///////////// GENRES ROUTES \\\\\\\\\\\\\\
-    //////////////////////////////////////////
+    // TUTTI I FILM CON RISPETTIVI GENERI ASSOCIATI
+    Route::get('/movies', [MovieController::class, 'index']);
+
+    // UN FILM SPECIFICO CON ASSOCIATI I GENERI
+    Route::get('/movies/{id}', [MovieController::class, 'show']);
+
+    // TUTTE LE SALE E I CINEMA A CUI SONO ASSOCIATE
+    Route::get('/halls', [HallController::class, 'index']);
+    // SALA SPECIFICA CON TEATRO E SEDUTE ASSOCIATE
+    Route::get('/halls/{hall}', [HallController::class, 'show']);
+
+    //(SOLO PER SVILUPPO)
+    //TUTTE LE PRENOTAZIONI
+    Route::get('/reservations', [ReservationController::class, 'index']);
+    //TUTTI I BIGLIETTI CON ASSOCIATE LE PRENOTAZIONI E GLI SCONTI
+    Route::get('/tickets', [TicketController::class, 'index']);
+
+    // GENRES ROUTES 
     Route::get('/genres', [GenreController::class, 'index']);
     Route::get('/genres/{genre}', [GenreController::class, 'show']);
 
-    // lista dei film di un determinato cinema che include gli showtimes corrispondenti ai film in quel cinema specifico
-    Route::get('theaters/{theater}/movies', [TheaterController::class, 'moviesWithShowtimes']);
+    // DISCOUNTCATEGORIES
+    Route::get('/discount-categories', [DiscountCategoryController::class, 'index']);
+    Route::get('/discount-categories/{discount_category}', [DiscountCategoryController::class, 'show']);
 });
-
-
-
-
-
-
-
-
-
 
 
 

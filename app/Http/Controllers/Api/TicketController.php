@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Ticket;
 use App\Models\Reservation;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
 
@@ -63,16 +64,7 @@ class TicketController extends Controller
      */
     public function update(UpdateTicketRequest $request, Ticket $ticket)
     {
-        $request->validate([
-            'reservation_id' => 'required|exists:reservations,id',
-            'base_price' => 'required|numeric|min:0',
-            'discount_id' => 'nullable|exists:discount_categories,id',
-            'final_price' => 'required|numeric|min:0',
-            'purchase_date' => 'required|date',
-        ]);
-
-        $ticket->update($request->all());
-        return response()->json($ticket);
+        //
     }
 
     /**
@@ -80,7 +72,6 @@ class TicketController extends Controller
      */
     public function destroy(Ticket $ticket)
     {
-        $ticket->delete();
-        return response()->json(null, 204);
+        //
     }
 }

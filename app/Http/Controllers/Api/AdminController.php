@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Hall;
 use App\Models\Genre;
@@ -10,6 +10,7 @@ use App\Models\Showtime;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Models\DiscountCategory;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
@@ -27,13 +28,6 @@ class AdminController extends Controller
 
    //////// Movies Management ////////
 
-    public function indexMovies()
-    {
-        $this->authorizeAdmin();
-        $movies = Movie::all();
-        return response()->json($movies);
-    }
-
     public function storeMovie(Request $request)
     {
         $this->authorizeAdmin();
@@ -46,15 +40,11 @@ class AdminController extends Controller
             'rating' => 'required|string|max:10',
             'trailer_url' => 'required|string|url|max:255',
             'poster_url' => 'required|string|url|max:255',
+            'release_date' => 'required|date',
+            'days_in_theaters' => 'required|integer|min:1',
         ]);
         $movie = Movie::create($request->all());
         return response()->json($movie, 201);
-    }
-
-    public function showMovie(Movie $movie)
-    {
-        $this->authorizeAdmin();
-        return response()->json($movie);
     }
 
     public function updateMovie(Request $request, Movie $movie)
@@ -69,6 +59,8 @@ class AdminController extends Controller
             'rating' => 'string|max:10',
             'trailer_url' => 'string|url|max:255',
             'poster_url' => 'string|url|max:255',
+            'release_date' => 'sometimes|date',
+            'days_in_theaters' => 'sometimes|integer|min:1',
         ]);
         $movie->update($request->all());
         return response()->json($movie, 200);
@@ -82,13 +74,6 @@ class AdminController extends Controller
     }
 
     /////// Showtimes Management ///////
-
-     public function indexShowtimes()
-     {
-         $this->authorizeAdmin();
-         $showtimes = Showtime::all();
-         return response()->json($showtimes);
-     }
  
      public function createShowtime(Request $request)
      {
@@ -100,12 +85,6 @@ class AdminController extends Controller
          ]);
          $showtime = Showtime::create($request->all());
          return response()->json($showtime, 201);
-     }
-
-     public function showShowtime(Showtime $showtime)
-     {
-         $this->authorizeAdmin();
-         return response()->json($showtime);
      }
  
      public function updateShowtime(Request $request, Showtime $showtime)
@@ -127,14 +106,7 @@ class AdminController extends Controller
          return response()->json(null, 204);
      }
 
-      /////// Discount Categories Management ///////
-
-    public function indexDiscountCategories()
-    {
-        $this->authorizeAdmin();
-        $discountCategories = DiscountCategory::all();
-        return response()->json($discountCategories);
-    }
+    /////// Discount Categories Management ///////
 
     public function createDiscountCategory(Request $request)
     {
@@ -147,12 +119,6 @@ class AdminController extends Controller
         ]);
         $discountCategory = DiscountCategory::create($request->all());
         return response()->json($discountCategory, 201);
-    }
-
-    public function showDiscountCategory(DiscountCategory $discountCategory)
-    {
-        $this->authorizeAdmin();
-        return response()->json($discountCategory);
     }
 
     public function updateDiscountCategory(Request $request, DiscountCategory $discountCategory)
@@ -206,98 +172,5 @@ class AdminController extends Controller
         return response()->json($reservation, 200);
     }
 
-    // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> IN FORSE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    //////// Theaters Management ////////
-
-    // public function indexTheaters()
-    // {
-    //     $this->authorizeAdmin();
-    //     $theaters = Theater::all();
-    //     return response()->json($theaters);
-    // }
-
-    // public function storeTheater(Request $request)
-    // {
-    //     $this->authorizeAdmin();
-    //     $request->validate([
-    //         'name' => 'required|string|max:100',
-    //         'address' => 'required|string',
-    //         'phone' => 'required|string|max:30',
-    //         'email' => 'required|string|email|max:100',
-    //     ]);
-    //     $theater = Theater::create($request->all());
-    //     return response()->json($theater, 201);
-    // }
-
-    // public function showTheater(Theater $theater)
-    // {
-    //     $this->authorizeAdmin();
-    //     return response()->json($theater);
-    // }
-
-    // public function updateTheater(Request $request, Theater $theater)
-    // {
-    //     $this->authorizeAdmin();
-    //     $request->validate([
-    //         'name' => 'string|max:100',
-    //         'address' => 'string',
-    //         'phone' => 'string|max:30',
-    //         'email' => 'string|email|max:100',
-    //     ]);
-    //     $theater->update($request->all());
-    //     return response()->json($theater, 200);
-    // }
-
-    // public function destroyTheater(Theater $theater)
-    // {
-    //     $this->authorizeAdmin();
-    //     $theater->delete();
-    //     return response()->json(null, 204);
-    // }
-
-    //////// Halls Management ////////
-
-    // public function indexHalls()
-    // {
-    //     $this->authorizeAdmin();
-    //     $halls = Hall::all();
-    //     return response()->json($halls);
-    // }
-
-    // public function storeHall(Request $request)
-    // {
-    //     $this->authorizeAdmin();
-    //     $request->validate([
-    //         'name' => 'required|string|max:50',
-    //         'capacity' => 'required|integer|min:1',
-    //         'theater_id' => 'required|exists:theaters,id',
-    //     ]);
-    //     $hall = Hall::create($request->all());
-    //     return response()->json($hall, 201);
-    // }
-
-    // public function showHall(Hall $hall)
-    // {
-    //     $this->authorizeAdmin();
-    //     return response()->json($hall);
-    // }
-
-    // public function updateHall(Request $request, Hall $hall)
-    // {
-    //     $this->authorizeAdmin();
-    //     $request->validate([
-    //         'name' => 'string|max:50',
-    //         'capacity' => 'integer|min:1',
-    //         'theater_id' => 'exists:theaters,id',
-    //     ]);
-    //     $hall->update($request->all());
-    //     return response()->json($hall, 200);
-    // }
-
-    // public function destroyHall(Hall $hall)
-    // {
-    //     $this->authorizeAdmin();
-    //     $hall->delete();
-    //     return response()->json(null, 204);
-    // }
+   
 }

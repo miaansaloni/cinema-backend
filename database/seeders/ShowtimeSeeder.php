@@ -24,12 +24,14 @@ class ShowtimeSeeder extends Seeder
         foreach ($movies as $movie) {
             foreach ($halls as $hall) {
                 // Creazione degli orari di proiezione per ogni film in ogni sala
-                for ($i = 0; $i < 5; $i++) {
+                for ($i = 0; $i < 2; $i++) {
                     $startTime = Carbon::now()->addDays($i)->hour(rand(8, 20))->minute(0)->second(0);
-
+                    $date = Carbon::now()->addDays($i)->format('Y-m-d');
+                    
                     Showtime::create([
                         'movie_id' => $movie->id,
                         'hall_id' => $hall->id,
+                        'date' => $date,
                         'start_time' => $startTime,
                     ]);
                 }

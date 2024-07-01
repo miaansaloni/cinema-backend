@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Models\DiscountCategory;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreDiscountCategoryRequest;
 use App\Http\Requests\UpdateDiscountCategoryRequest;
 
@@ -31,16 +32,7 @@ class DiscountCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|max:50',
-            'description' => 'required',
-            'discount_percentage' => 'required|numeric|between:0,100',
-            'condition' => 'required',
-        ]);
-
-        $discountCategory = DiscountCategory::create($request->all());
-
-        return response()->json($discountCategory, 201);
+        
     }
 
     /**
@@ -64,16 +56,7 @@ class DiscountCategoryController extends Controller
      */
     public function update(UpdateDiscountCategoryRequest $request, DiscountCategory $discount_category)
     {
-        $request->validate([
-            'name' => 'required|max:50',
-            'description' => 'required',
-            'discount_percentage' => 'required|numeric|between:0,100',
-            'condition' => 'required',
-        ]);
-
-        $discount_category->update($request->all());
-
-        return response()->json($discount_category, 200);
+        
     }
 
     /**
@@ -81,7 +64,6 @@ class DiscountCategoryController extends Controller
      */
     public function destroy(DiscountCategory $discount_category)
     {
-        $discount_category->delete();
-        return response()->json(null, 204);
+        
     }
 }

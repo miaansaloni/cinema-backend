@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Movie;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
 use Illuminate\Support\Facades\Validator;
@@ -21,7 +22,7 @@ class MovieController extends Controller
 
     public function index()
     {
-        $movies = Movie::with(['genres', 'showtimes'])->get();
+        $movies = Movie::with(['genres'])->get();
         return response()->json($movies);
     }
 
@@ -38,19 +39,7 @@ class MovieController extends Controller
      */
     public function store(StoreMovieRequest $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:100',
-            'description' => 'required|string',
-            'duration' => 'required|integer',
-            'director' => 'required|string|max:100',
-            'cast' => 'required|string',
-            'rating' => 'required|string|max:10',
-            'trailer_url' => 'required|string|max:255',
-            'poster_url' => 'required|string|max:255',
-        ]);
-        $movie = Movie::create($validated);
-
-        return response()->json($movie, 201);
+        //
     }
 
     /**
@@ -58,7 +47,7 @@ class MovieController extends Controller
      */
     public function show($id)
     {
-        $movie = Movie::find($id);
+        $movie = Movie::with('genres')->find($id);
         if (!$movie) {
             return response()->json(['message' => 'Movie not found'], 404);
         }
@@ -78,30 +67,30 @@ class MovieController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $movie = Movie::find($id);
+        // $movie = Movie::find($id);
 
-        if (!$movie) {
-            return response()->json(['message' => 'Movie not found'], 404);
-        }
+        // if (!$movie) {
+        //     return response()->json(['message' => 'Movie not found'], 404);
+        // }
 
-        $validator = Validator::make($request->all(), [
-            'title' => 'string|max:100', 
-            'description' => 'string',
-            'duration' => 'integer',
-            'director' => 'string|max:100',
-            'cast' => 'string',
-            'rating' => 'integer|max:10',
-            'trailer_url' => 'string|max:255|url',
-            'poster_url' => 'string|max:255|url',
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'title' => 'string|max:100', 
+        //     'description' => 'string',
+        //     'duration' => 'integer',
+        //     'director' => 'string|max:100',
+        //     'cast' => 'string',
+        //     'rating' => 'integer|max:10',
+        //     'trailer_url' => 'string|max:255|url',
+        //     'poster_url' => 'string|max:255|url',
+        // ]);
 
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
+        // if ($validator->fails()) {
+        //     return response()->json($validator->errors(), 422);
+        // }
 
-        $movie->update($request->all());
+        // $movie->update($request->all());
 
-        return response()->json($movie);
+        // return response()->json($movie);
     }
 
     /**
@@ -109,14 +98,6 @@ class MovieController extends Controller
      */
     public function destroy($id)
     {
-        $movie = Movie::find($id);
-
-        if (!$movie) {
-            return response()->json(['message' => 'Movie not found'], 404);
-        }
-
-        $movie->delete();
-
-        return response()->json(['message' => 'Movie deleted successfully']);
+        //
     }
 }

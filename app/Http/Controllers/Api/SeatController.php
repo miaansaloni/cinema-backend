@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Seat;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSeatRequest;
 use App\Http\Requests\UpdateSeatRequest;
 
@@ -63,17 +64,7 @@ class SeatController extends Controller
      */
     public function update(UpdateSeatRequest $request, $id)
     {
-        $seat = Seat::findOrFail($id);
-        
-        $validatedData = $request->validate([
-            'hall_id' => 'required|exists:halls,id',
-            'row' => 'required|string|max:10',
-            'seat_number' => 'required|string|max:10',
-            'is_available' => 'required|boolean',
-        ]);
-
-        $seat->update($validatedData);
-        return response()->json($seat);
+        //
     }
 
     /**
@@ -81,8 +72,6 @@ class SeatController extends Controller
      */
     public function destroy($id)
     {
-        $seat = Seat::findOrFail($id);
-        $seat->delete();
-        return response()->json(null, 204);
+        //
     }
 }

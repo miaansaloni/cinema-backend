@@ -18,10 +18,16 @@ class Movie extends Model
         'rating',
         'trailer_url',
         'poster_url',
+        'release_date', 
+        'days_in_theaters' 
     ];
 
     public function genres()
     {
         return $this->belongsToMany(Genre::class, 'genre_movie');
+    }
+    public function showtimes()
+    {
+        return $this->hasMany(Showtime::class);
     }
 }

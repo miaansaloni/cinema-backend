@@ -15,6 +15,9 @@ return [
     |
     */
 
+
+    // 'paths' => ['api/*', 'sanctum/csrf-cookie'], // Percorsi dove le politiche CORS devono essere applicate
+
     'paths' => ['*'],
 
     'allowed_methods' => ['*'],

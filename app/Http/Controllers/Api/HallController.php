@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Hall;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreHallRequest;
 use App\Http\Requests\UpdateHallRequest;
 
@@ -21,13 +22,7 @@ class HallController extends Controller
      */
     public function create()
     {
-        return response()->json([
-            'default_values' => [
-                'name' => '',
-                'capacity' => 0,
-                'theater_id' => null,
-            ]
-        ]);
+       //
     }
 
     /**
@@ -35,14 +30,7 @@ class HallController extends Controller
      */
     public function store(StoreHallRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:50',
-            'capacity' => 'required|integer|min:1',
-            'theater_id' => 'required|exists:theaters,id',
-        ]);
-
-        $hall = Hall::create($validated);
-        return response()->json($hall, 201);
+        //
     }
 
     /**
@@ -50,7 +38,7 @@ class HallController extends Controller
      */
     public function show(Hall $hall)
     {
-        // Carica il teatro e le seats associate 
+        // Carica il cinema e le seats associate 
         $hall = Hall::with('theater', 'seats')->find($hall->id);
         return response()->json($hall);
     }
@@ -60,9 +48,7 @@ class HallController extends Controller
      */
     public function edit(Hall $hall)
     {
-        return response()->json([
-            'hall' => $hall->load('theater')
-        ]);
+       //
     }
 
     /**
@@ -70,14 +56,7 @@ class HallController extends Controller
      */
     public function update(UpdateHallRequest $request, Hall $hall)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:50',
-            'capacity' => 'required|integer|min:1',
-            'theater_id' => 'required|exists:theaters,id',
-        ]);
-
-        $hall->update($validated);
-        return response()->json($hall, 200);
+        //
     }
 
     /**
@@ -85,7 +64,6 @@ class HallController extends Controller
      */
     public function destroy(Hall $hall)
     {
-        $hall->delete();
-        return response()->json(null, 204);
+       //
     }
 }

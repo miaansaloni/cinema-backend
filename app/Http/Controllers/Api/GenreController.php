@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Genre;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreGenreRequest;
 use App\Http\Requests\UpdateGenreRequest;
 
@@ -23,11 +24,7 @@ class GenreController extends Controller
      */
     public function create()
     {
-        return response()->json([
-            'default_values' => [
-                'name' => '',
-            ]
-        ]);
+      //
     }
 
     /**
@@ -35,13 +32,7 @@ class GenreController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:50|unique:genres,name',
-        ]);
-
-        $genre = Genre::create($validated);
-
-        return response()->json($genre, 201);
+       //
     }
 
     /**
@@ -59,10 +50,7 @@ class GenreController extends Controller
      */
     public function edit(Genre $genre)
     {
-        // Return the genre data to be edited
-        return response()->json([
-            'genre' => $genre
-        ]);
+        //
     }
     
 
@@ -71,13 +59,7 @@ class GenreController extends Controller
      */
     public function update(Request $request, Genre $genre)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:50|unique:genres,name,' . $genre->id,
-        ]);
-
-        $genre->update($validated);
-
-        return response()->json($genre, 200);
+        //
     }
 
     /**
@@ -85,8 +67,6 @@ class GenreController extends Controller
      */
     public function destroy(Genre $genre)
     {
-        $genre->delete();
-
-        return response()->json(null, 204);
+       //
     }
 }
