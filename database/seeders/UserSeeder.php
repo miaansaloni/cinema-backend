@@ -16,8 +16,8 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'first_name' => 'Admin',
-            'last_name' => 'User',
+            'name' => 'Admin',
+            'surname' => 'User',
             'birthday' => '1980-01-01',
             'email' => 'admin@example.com',
             'password' => Hash::make('password'), 
@@ -27,8 +27,8 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
         ]);
         User::create([
-            'first_name' => 'User',
-            'last_name' => 'Example',
+            'name' => 'User',
+            'surname' => 'Example',
             'birthday' => '2001-01-01',
             'email' => 'user@example.com',
             'password' => Hash::make('password'), 
@@ -38,8 +38,8 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
         ]);
         User::create([
-            'first_name' => 'Mario',
-            'last_name' => 'Rossi',
+            'name' => 'Mario',
+            'surname' => 'Rossi',
             'birthday' => '1995-05-15',
             'email' => 'mariorossi@example.com',
             'password' => Hash::make('password123'),
@@ -49,8 +49,8 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
         ]);
         User::create([
-            'first_name' => 'Elisa',
-            'last_name' => 'Gentile',
+            'name' => 'Elisa',
+            'surname' => 'Gentile',
             'birthday' => '1988-10-20',
             'email' => 'elisagentile@example.com',
             'password' => Hash::make('qwerty'),

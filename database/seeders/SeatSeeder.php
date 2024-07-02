@@ -18,7 +18,7 @@ class SeatSeeder extends Seeder
 
         foreach ($halls as $hall) {
             // Creazione di posti per ogni sala
-            for ($row = 'A'; $row <= 'Z'; $row++) {
+            for ($row = 'A'; $row <= 'D'; $row++) {
                 for ($seatNumber = 1; $seatNumber <= 10; $seatNumber++) {
                     Seat::create([
                         'hall_id' => $hall->id,
