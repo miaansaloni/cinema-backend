@@ -60,6 +60,7 @@ Route::name('api.v1.')
 
     // TORNA UNO SPECIFICO CINEMA CON TUTTI I FILM ASSOCIATI, A CUI A LORO VOLTA SONO ASSOCIATI GLI ORARI DI PROIEZIONE E LE RISPETTIVE SALE
     Route::get('/theaters/{theater}/movies-with-showtimes', [TheaterController::class, 'moviesWithShowtimes']);
+    Route::get('/theaters', [TheaterController::class, 'index']);
 
     // TUTTI I FILM CON RISPETTIVI GENERI ASSOCIATI
     Route::get('/movies', [MovieController::class, 'index']);

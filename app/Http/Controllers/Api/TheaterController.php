@@ -15,10 +15,10 @@ class TheaterController extends Controller
     /**
      * Display a listing of the resource.
      */
-    // public function index()
-    // {
-    //     return Theater::all();
-    // }
+    public function index()
+    {
+        return Theater::all();
+    }
 
     // public function index()
     // {
