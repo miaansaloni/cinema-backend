@@ -67,6 +67,7 @@ Route::name('api.v1.')
 
     // UN FILM SPECIFICO CON ASSOCIATI I GENERI
     Route::get('/movies/{id}', [MovieController::class, 'show']);
+    Route::get('movies/{id}/theaters', [MovieController::class, 'theatersShowingMovie']);
 
     // TUTTE LE SALE E I CINEMA A CUI SONO ASSOCIATE
     Route::get('/halls', [HallController::class, 'index']);

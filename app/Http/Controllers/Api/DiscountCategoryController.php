@@ -20,22 +20,6 @@ class DiscountCategoryController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(DiscountCategory $discount_category)
@@ -43,27 +27,4 @@ class DiscountCategoryController extends Controller
          return response()->json($discount_category);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(DiscountCategory $discount_category)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateDiscountCategoryRequest $request, DiscountCategory $discount_category)
-    {
-        
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(DiscountCategory $discount_category)
-    {
-        
-    }
 }

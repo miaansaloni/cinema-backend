@@ -20,22 +20,22 @@ class TheaterController extends Controller
         return Theater::all();
     }
 
-    // public function index()
-    // {
-    //    $theaters = Theater::with('halls.showtimes')->get();
-    //    return response()->json($theaters);
-    // }
-
     // lista dei film di un determinato cinema che include gli showtimes corrispondenti ai film in quel cinema specifico
     public function moviesWithShowtimes(Theater $theater)
-    {
-        // Recupera i film con showtimes associati alle sale del cinema
-        $movies = Movie::whereHas('showtimes', function($query) use ($theater) {
-            $query->whereIn('hall_id', $theater->halls->pluck('id'));
-        })->with(['showtimes' => function($query) use ($theater) {
-            $query->whereIn('hall_id', $theater->halls->pluck('id'));
-        }])->get();
+{
+    // Recupera i film con showtimes associati alle sale del cinema
+    $movies = Movie::whereHas('showtimes', function($query) use ($theater) {
+        $query->whereIn('hall_id', $theater->halls->pluck('id'));
+    })->with(['showtimes' => function($query) use ($theater) {
+        $query->whereIn('hall_id', $theater->halls->pluck('id'));
+    }])->get();
 
-        return response()->json($movies);
-    }
+    
+    $result = [
+        'theater_name' => $theater->name, // Aggiunge il nome del cinema
+        'movies' => $movies
+    ];
+
+    return response()->json($result);
+}
 }
