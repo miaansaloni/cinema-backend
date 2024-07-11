@@ -19,4 +19,9 @@ class DiscountCategory extends Model
     protected $casts = [
         'discount_percentage' => 'decimal:2', // Cast del campo come decimal con 2 cifre decimali
     ];
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }

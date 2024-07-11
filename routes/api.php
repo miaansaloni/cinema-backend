@@ -8,7 +8,6 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\GenreController;
 use App\Http\Controllers\Api\MovieController;
-use App\Http\Controllers\Api\TicketController;
 use App\Http\Controllers\Api\TheaterController;
 use App\Http\Controllers\Api\ShowtimeController;
 use App\Http\Controllers\Api\ReservationController;
@@ -77,8 +76,6 @@ Route::name('api.v1.')
     //(SOLO PER SVILUPPO)
     //TUTTE LE PRENOTAZIONI
     Route::get('/reservations', [ReservationController::class, 'index']);
-    //TUTTI I BIGLIETTI CON ASSOCIATE LE PRENOTAZIONI E GLI SCONTI
-    Route::get('/tickets', [TicketController::class, 'index']);
 
     // GENRES ROUTES 
     Route::get('/genres', [GenreController::class, 'index']);
@@ -151,15 +148,6 @@ Route::name('api.v1.')
 //         Route::get('/{reservation}/edit', [ReservationController::class, 'edit']);
 //     });
 
-//      //////////// TICKETS \\\\\\\\\\\\
-//      Route::prefix('tickets')->group(function () {
-//         Route::get('/', [TicketController::class, 'index']);
-//         Route::post('/', [TicketController::class, 'store']);
-//         Route::get('/{ticket}', [TicketController::class, 'show']);
-//         Route::put('/{ticket}', [TicketController::class, 'update']);
-//         Route::delete('/{ticket}', [TicketController::class, 'destroy']);
-//     });
-// });
 
 
 

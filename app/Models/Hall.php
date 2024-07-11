@@ -25,6 +25,6 @@ class Hall extends Model
     }
     public function seats()
     {
-        return $this->hasMany(Seat::class); // Aggiungi questa riga
+        return $this->hasMany(Seat::class); 
     }
 }

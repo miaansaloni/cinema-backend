@@ -14,6 +14,16 @@ class Reservation extends Model
         'showtime_id',
         'seat_id',
         'status',
+        'base_price',
+        'discount_id',
+        'final_price',
+        'purchase_date',
+    ];
+
+    protected $casts = [
+        'base_price' => 'decimal:2',
+        'final_price' => 'decimal:2',
+        'purchase_date' => 'datetime',
     ];
 
     public function user()
@@ -31,8 +41,8 @@ class Reservation extends Model
         return $this->belongsTo(Seat::class);
     }
 
-    public function tickets()
+    public function discount()
     {
-        return $this->hasMany(Ticket::class);
+        return $this->belongsTo(DiscountCategory::class);
     }
 }

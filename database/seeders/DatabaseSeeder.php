@@ -26,7 +26,6 @@ class DatabaseSeeder extends Seeder
             DiscountCategorySeeder::class,    
             ReservationSeeder::class,    
             GenreMovieSeeder::class,    
-            TicketSeeder::class,    
         ]);
     }
 
